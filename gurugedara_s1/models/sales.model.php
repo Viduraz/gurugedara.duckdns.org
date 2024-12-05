@@ -37,6 +37,19 @@ class ModelSales{
 
 	}
 
+	static public function mdlShoeNetProfit($table, $item, $value) {
+
+		$salesTable = ModelSales::mdlShowSales($table, $item, $value);
+		$productTable = ProductsModel::mdlShowProducts($table, $item, $value, $order);
+
+		foreach ($salesTable as $key => $value) {
+			
+			$products = $value["products"];
+
+		}
+
+	}
+
 	/*=============================================
 	REGISTERING SALE
 	=============================================*/

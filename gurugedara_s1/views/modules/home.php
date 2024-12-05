@@ -1,3 +1,30 @@
+<?php
+  $item = null;
+  $value = null;
+  $table = "sales";
+
+  $sales = ModelSales::mdlShowSales($table, $item, $value);
+
+  $totalSaleAmount = 0; // Variable to store total sale amount
+			$previousDate = null; // Variable to store the previous date
+	
+			foreach ($sales as $row => $item){
+	
+				// Calculate sale amount for the current sale
+				$saleAmount = $item["totalPrice"];
+        
+				// Check if the date has changed
+				$currentDate = substr($item["saledate"],0,10);
+				if ($currentDate != $previousDate) {
+					$previousDate = $currentDate; // Update previous date
+					$totalSaleAmount = 0; // Reset total sale amount for the new day
+				}
+
+				$totalSaleAmount += $saleAmount; // Add sale amount to total
+	
+			}
+?>
+
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -88,13 +115,20 @@
 
            echo '<div class="box box-default">
 
-           <div class="box-header">
+                  <div class="box-header">
 
-           <h1>Welcome ' .$_SESSION["name"].'</h1>
+                    <h1>Welcome ' .$_SESSION["name"].'</h1>
 
-           </div>
+                  </div>
+                  <center>
+                  <div class="box-header">
 
-           </div>';
+                    <h1>Today Income : Rs. ' .$totalSaleAmount.'</h1>
+
+                  </div>
+                  </center>
+
+                </div>';
 
         }
 
